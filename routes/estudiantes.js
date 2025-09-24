@@ -5,7 +5,7 @@ const Estudiante = require("../models/estudiante")
 const router = express.Router()
 
 // GET - Obtener todos los estudiantes
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   const { curso } = req.query
   let filtro = {}
   if (curso) {
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 })
 
 // GET - Obtener un estudiante por ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const { id } = req.params
 
   try {
@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
 })
 
 // POST - Crear un nuevo estudiante
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   const { nombre, apellido, email, cursos } = req.body
 
   try {
@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 })
 
 // PUT - Actualizar un estudiante por ID
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const estudiante = await Estudiante.findByIdAndUpdate(
       req.params.id,
@@ -67,7 +67,7 @@ router.put("/:id", async (req, res) => {
 })
 
 // DELETE - Eliminar un estudiante por ID
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const estudiante = await Estudiante.findByIdAndDelete(req.params.id)
 
